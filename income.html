@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin:10px;
+        }
+        
+        #text,#rent,#plants,#field,#durable{
+            /* width:40%; */
+            padding:5px;
+            margin-top:10px;
+            font-size: 19px;;
+            /* margin-top:-1px; */
+        }
+        #land{
+            margin-top:20px;
+            font-size: 19px;;
+
+        }
+        .inputBox{
+            margin-left:20%;
+            /* margin-left:20%; */
+
+        }
+        .inputBox1{
+            margin-left:34%;
+            /* margin-left:20%; */
+
+        }
+        .inputBox2{
+            margin-left:34%;
+            /* margin-left:20%; */
+            padding:5px;
+            font-size: 19px;;
+
+
+        }
+        .inputBox3,.inputBox4{
+            margin-left:26%;
+            /* margin-left:20%; */
+            padding:5px;
+            font-size: 19px;;
+            margin-top: 9px;;
+
+
+        }
+        .radioButtons{
+            margin-left:20%;
+
+        }
+        #dimension{
+            font-size: 19px;
+            margin-top:1%;
+
+        }
+        #checkbox{
+            margin-left: 28%;;
+        }
+    </style>
+</head>
+<body>
+    <form style = "font-size: 19px;margin:10px;">Does te applicant's family own the house they live in ?
+       <input type = "radio" class = "radioButtons" name = "correct" onclick = "house(0)">Yes
+       <input type = "radio" name = "correct" onclick = "house(1)"/>No
+       
+    </form>
+
+    <!-- Suppose they don't have own house -->
+    <form id = "rent">
+        <label>Rent of the house:</label>
+        <input type = "number" id = "rent" class = "inputBox1" placeholder="Enter the Rent of the House:"/>
+       
+    </form>
+
+<!-- Suppose they have own house -->
+    <form id = "text">
+    <label>Market value of house applicant owned in Rs:</label>
+    <input type = "number" id="text" class = "inputBox" placeholder="Enter the Market value"/>
+    <div>
+        <label>Dimensions of house applicant is living house: </label>
+    <input type = "number" id = "text" class = "inputBox" placeholder="Enter The Dimension of house"/>
+    </div>
+    </form>
+
+<!-- Land of the candidate -->
+    <form id = "land">
+        Does the Applicant's family own land?
+       <input type = "radio" name = "home" onclick = "land(0)"/>Yes
+       <input type = "radio" name = "home" onclick = "land(1)"/>No
+    </form>
+
+    <form id="dimension">
+        <lable id = "land1">Dimension of land</lable>
+        <input type = "number"  class = "inputBox2" placeholder="Enter the dimension of land"/>
+        <div><label>Market value of land owned in Rs:</label>
+        <input type = "number"  class = "inputBox3" placeholder = "Enter the market value of land"/>
+    </div>
+     </form>
+
+     <!-- grow plants -->
+
+     <form id = "plants">
+        <label>Does the applicant's family grow anything on the land</label>
+        <input type = "radio" name = "plants" onclick = "field(0)"/>Yes
+        <input type = "radio" name = "plants" onclick = "field(1)"/>No
+     </form>
+     <div id = "field">
+        <label>Enter the annual income of field</label>
+        <input type = "number" class = "inputBox4" placeholder = "Enter annual income"/>
+     </div>
+
+
+     <!-- consumer durable owned -->
+     <form id = "durable">
+        <label>
+            Consumer durables owned?
+        </label>
+        
+     <input  id = "checkbox" type = "checkbox" name = "things" />Fridge
+     <input type = "checkbox" name = "things" />Washing machine
+     <input type = "checkbox" name = "things"/>Mixer
+     <input type = "checkbox" name = "things"/>TV
+     <input type ="checkbox" name = "things" />Others
+     </form>
+
+</body>
+</html>
+<script>
+    function house(x){
+        if(x === 0){
+            document.getElementById("text").style.display = "block";
+        }
+        else{
+            document.getElementById("text").style.display = "none"
+        }
+        if(x === 1){
+            document.getElementById("rent").style.display = "block"
+        }
+        else{
+            document.getElementById("rent").style.display = "none"
+        }
+    }
+
+
+
+    function land(name){
+        if(name === 0){
+            document.getElementById("dimension").style.display = "block"
+
+        }
+        else{
+            document.getElementById("dimension").style.display = "none"
+        }
+    }
+
+
+    function field(value){
+        if(value === 0){
+            document.getElementById("field").style.display = "block"
+        }
+        else{
+            document.getElementById("field").style.display = "none"
+        }
+    }
+</script>
