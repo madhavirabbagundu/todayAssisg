@@ -7,7 +7,11 @@
     <title>Document</title>
     <style>
         body{
-            margin:10px;
+            /* margin:10%; */
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            margin:40px     ;
+            padding:5%;
+            color:rgb(55, 55, 55);
         }
         
         #text,#rent,#plants,#field,#durable{
@@ -64,6 +68,7 @@
     </style>
 </head>
 <body>
+    <div>
     <form style = "font-size: 19px;margin:10px;">Does te applicant's family own the house they live in ?
        <input type = "radio" class = "radioButtons" name = "correct" onclick = "house(0)">Yes
        <input type = "radio" name = "correct" onclick = "house(1)"/>No
@@ -100,19 +105,31 @@
         <div><label>Market value of land owned in Rs:</label>
         <input type = "number"  class = "inputBox3" placeholder = "Enter the market value of land"/>
     </div>
-     </form>
+    <!-- <div id="plants"> -->
+
+        <form id = "plants">
+            <label>Does the applicant's family grow anything on the land</label>
+            <input type = "radio" name = "plants" onclick = "field(0)"/>Yes
+            <input type = "radio" name = "plants" onclick = "field(1)"/>No
+            <div id = "field">
+            <label>Enter the annual income of field</label>
+            <input type = "number" class = "inputBox4" placeholder = "Enter annual income"/>
+         </div>
+
+        </form>
+         <!-- <div id = "field"> -->
+           
+         <!-- </div> -->
+
+
+    <!-- </div>      -->
+
+
+</form>
 
      <!-- grow plants -->
 
-     <form id = "plants">
-        <label>Does the applicant's family grow anything on the land</label>
-        <input type = "radio" name = "plants" onclick = "field(0)"/>Yes
-        <input type = "radio" name = "plants" onclick = "field(1)"/>No
-     </form>
-     <div id = "field">
-        <label>Enter the annual income of field</label>
-        <input type = "number" class = "inputBox4" placeholder = "Enter annual income"/>
-     </div>
+    
 
 
      <!-- consumer durable owned -->
@@ -128,9 +145,55 @@
      <input type ="checkbox" name = "things" />Others
      </form>
 
+
+     <!-- vehicles owned -->
+
+     <form id = "vehicles">
+        <label>
+            Vehicles owned?
+        </label>
+        <label> 
+     <input  id = "checkbox" type = "checkbox" name = "things"/>No
+     <input type = "checkbox" id = "bike" name = "things" onclick = "checkVehicle(0)"/>Bike
+     <input type = "checkbox"  id = "car" name = "things" onclick = "checkVehicle(1)"/>Car</label>
+     <input type = "checkbox" name = "things"/>Earth Mover
+     <input type ="checkbox" name = "things" />Tracktor
+
+     </form>
+   
+     <div id = "both">
+     <div id = "car1">
+        <label id = "data">Enter the cost of the car fuel</label>
+        <input type = "number" placeholder = "Enter the cost of the car fuel"/>
+     </div>
+     <div id = "bike1">
+        <label>Enter the cost of the Bike fuel</label>
+        <input type = "number" placeholder = "Enter the cost of the Bike fuel"/>
+     </div>
+     </div>
+
+
+</div>
 </body>
 </html>
 <script>
+function checkVehicle(value){
+        if(value === 1){
+            if(document.getElementById("car").checked){
+
+        document.getElementById("data").style.display = "none";
+    }
+}
+    else{
+        document.getElementById("car1").style.display = "block";
+        // document.getElementById("car1").textContent="not checked";
+
+    }
+}
+
+
+
+
     function house(x){
         if(x === 0){
             document.getElementById("text").style.display = "block";
@@ -167,4 +230,26 @@
             document.getElementById("field").style.display = "none"
         }
     }
+
+
+    // function checkVehicle(value){
+    //     if(value === 0 || value === 1){
+    //         document.getElementById("both").style.display = "block";
+    //     }
+    //     else{
+    //         document.getElementById("both").style.display = "none";
+    //     }
+    //      if(value === 0 && value === true){
+    //         document.getElementById("bike").style.display = "block"
+    //     }
+    //     else{
+    //         document.getElementById("bike").style.display = "none";
+    //     }
+    //      if(value === 1){
+    //         document.getElementById("car").style.display = "block"
+    //     }
+    //     else{
+    //     document.getElementById("car").style.display = "none";
+    //     }
+    // }
 </script>
