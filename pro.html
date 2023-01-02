@@ -1,0 +1,1380 @@
+<main class="content">
+    <div class="container-fluid p-0">
+        <div class="container">
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-12">
+                    <div class="wizard">
+                        <div class="wizard-inner">
+                            <div class="connecting-line"></div>
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" [class]="wizardStepStyle[0]" (click)="changeSection(1)">
+                                    <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab"
+                                        [attr.aria-expanded]="wizardStepExpandState[0]">
+                                        <span class="round-tab">1 </span> <i>Applicant details &<br /> Living condition
+                                            assessment</i>
+                                    </a>
+                                </li>
+
+                                <li role="presentation" [class]="wizardStepStyle[1]" (click)="changeSection(2)">
+                                    <a data-toggle="tab" aria-controls="step2" role="tab"
+                                        [attr.aria-expanded]="wizardStepExpandState[1]">
+                                        <span class="round-tab">2</span> <i>Movable & immovable <br /> asset
+                                            assessment.</i>
+                                    </a>
+                                </li>
+
+                                <li role="presentation" [class]="wizardStepStyle[2]" (click)="changeSection(3)">
+                                    <a data-toggle="tab" aria-controls="step3" role="tab"
+                                        [attr.aria-expanded]="wizardStepExpandState[2]">
+                                        <span class="round-tab">3</span> <i>Family income<br />assessment </i>
+                                    </a>
+                                </li>
+
+                                <li role="presentation" [class]="wizardStepStyle[3]" (click)="changeSection(4)">
+                                    <a data-toggle="tab" aria-controls="step4" role="tab"
+                                        [attr.aria-expanded]="wizardStepExpandState[3]">
+                                        <span class="round-tab">4</span> <i> Family expenses<br />assessment</i>
+                                    </a>
+                                </li>
+
+                                <li role="presentation" [class]="wizardStepStyle[4]" (click)="changeSection(5)">
+                                    <a data-toggle="tab" aria-controls="step5" role="tab"
+                                        [attr.aria-expanded]="wizardStepExpandState[4]">
+                                        <span class="round-tab">5</span> <i>Surveyors assessment</i>
+                                    </a>
+                                </li>
+
+                                <li role="presentation" [class]="wizardStepStyle[5]" (click)="changeSection(6)">
+                                    <a data-toggle="tab" aria-controls="step6" role="tab"
+                                        [attr.aria-expanded]="wizardStepExpandState[5]">
+                                        <span class="round-tab">6</span> <i>Preview Page</i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- Chinni Code Step1 -->
+
+
+                        <form [formGroup]='form' (ngSubmit)="submit1()" validate *ngIf="wizardStepExpandState[0]"
+                         >
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="tab-content" id="main_form">
+                                        <div class="card">
+                                            <div id="applicant-details">
+                                                <div>
+                                                    <label>Application number</label><br>
+                                                    <input class="input-deco" type="number"
+                                                        formControlName="applicantnumber" />
+                                                    <!-- <mat-error >Required number</mat-error> -->
+                                                    <span class="validation-error"
+                                                        *ngIf="(formSubmitted || form.controls.applicantnumber.touched) && form.controls.applicantnumber.errors?.required">Application
+                                                        number required</span>
+                                                </div>
+                                                <div>
+                                                    <label>Name of the Applicant</label><br>
+                                                    <input class="input-deco" formControlName="applicantname"
+                                                        type="text" />
+                                                    <span class="validation-error"
+                                                        *ngIf="(formSubmitted || form.controls.applicantname.touched) && form.controls.applicantname.errors?.required">Application
+                                                        name required</span>
+                                                </div>
+                                            </div>
+                                            <label class="labelform">Does the applicant live or is from the house
+                                                visited?</label>
+                                            <span class="validation-error"
+                                                *ngIf="(formSubmitted || form.controls.applicanthouse.touched) && form.controls.applicanthouse.errors?.required">Application
+                                                number required</span>
+
+                                            <div class="inside-form1">
+                                                <!-- duration:{{house.yes}} -->
+                                                <label for="house">Yes</label><br>
+                                                <input type="radio" formControlName="applicanthouse" id="value2"
+                                                    name="house" value="Yes" (change)="livingOrNot($event)" />
+                                                <label for="house">No</label><br>
+                                                <input type="radio" formControlName="applicanthouse" id="value3"
+                                                    id="not_home" name="house" value="No"
+                                                    (change)="livingOrNot($event)">
+                                            </div>
+
+
+                                            <!-- showing details -->
+
+                                            <div id="showing_details">
+
+                                                <div>
+
+
+                                                    <label class="label_left">Where the Student Staying in?</label>
+                                                    <span class="validation-error"
+                                                        *ngIf="(formSubmitted || form.controls.applicantstaying.touched) && form.controls.applicantstaying.errors?.required">Application
+                                                        number required</span>
+                                                    <select class="showing-input" formControlName="applicantstaying"
+                                                        name="type_of_living" id="typeOfLiving">
+                                                        <option value="Paid Hostel">Paid Hostel</option>
+                                                        <option value="Free Hostel">Free Hostel</option>
+                                                        <option value="Relative House">Relative House</option>
+                                                    </select>
+                                                </div>
+
+
+
+                                            </div>
+
+                                            <div id="without_showing_details">
+                                                <div id="type_of_roof">
+                                                    <div>
+
+                                                        <label>Type of roof in applicant's house?</label>
+                                                        <p class="validation-error"
+                                                            *ngIf="(formSubmitted || form.controls.applicanthouseroof.touched) && form.controls.applicanthouseroof.errors?.required">
+                                                            Application number required</p>
+                                                        <select formControlName="applicanthouseroof" class="input-deco"
+                                                            name="type_of_roof" id="typeOfRoof">
+                                                            <option value=""></option>
+                                                            <option value="Tiles">Tiles</option>
+                                                            <option value="Tin">Tin</option>
+                                                            <option value="Leaves">Leaves</option>
+                                                            <option value="Hay">Hay</option>
+                                                            <option value="Asbestos">Asbestos</option>
+                                                            <option value="Concrete">Concrete</option>
+                                                            <option value="Others">Others</option>
+
+
+                                                        </select>
+
+
+                                                    </div>
+
+                                                    <div>
+
+                                                        <label>Type of Floor in applicant's house?</label>
+                                                        <span class="validation-error"
+                                                            *ngIf="(formSubmitted || form.controls.applicanthousefloor.touched) && form.controls.applicanthousefloor.errors?.required">Application
+                                                            number required</span>
+                                                        <select formControlName="applicanthousefloor" class="input-deco"
+                                                            name="type_of_roof" id="typeOfRoof">
+                                                            <option value=""></option>
+                                                            <option value="marble">Marble</option>
+                                                            <option value="granite">granite</option>
+                                                            <option value="Concrete">Concrete</option>
+                                                            <option value="Soil">Soil</option>
+
+
+
+                                                        </select>
+
+
+                                                    </div>
+                                                </div>
+                                                <div id="type-of-form">
+                                                    <div>
+                                                        <label class="labelform">Type of walls in the house?
+                                                        </label><br>
+                                                        <span class="validation-error"
+                                                            *ngIf="(formSubmitted || form.controls.applicanthousewall.touched) && form.controls.applicanthousewall.errors?.required">Application
+                                                            number required</span>
+                                                        <div class="inside-form1">
+                                                            <label for="pucca">Pucca</label><br>
+                                                            <input formControlName="applicanthousewall" type="radio"
+                                                                name="pucca" value="Pucca" />
+                                                            <label for="pucca">Non Pucca</label><br>
+                                                            <input formControlName="applicanthousewall" type="radio"
+                                                                name="pucca" value="Non Pucca" />
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <label style="margin-left: 50px;">Number of Rooms?</label>
+                                                        <span class="validation-error"
+                                                            *ngIf="(formSubmitted || form.controls.applicanthouserooms.touched) && form.controls.applicanthouserooms.errors?.required">Application
+                                                            number required</span>
+                                                        <select formControlName="applicanthouserooms" class="input-deco"
+                                                            name="number_of_rooms" style="margin-left: 50px;">
+                                                            <option value=""></option>
+                                                            <option value="One">1</option>
+                                                            <option value="Two">2</option>
+                                                            <option value="Three">3</option>
+                                                            <option value="Four">4</option>
+                                                            <option value="Five">5</option>
+
+                                                        </select>
+                                                    </div>
+                                                    <div>
+                                                        <label style="margin-left: 50px;">Number of Members?</label>
+                                                        <span  class="validation-error"
+                                                            *ngIf="(formSubmitted || form.controls.applicanthousemembers.touched) && form.controls.applicanthousemembers.errors?.required">Application
+                                                            members required</span>
+                                                        <select formControlName="applicanthousemembers"
+                                                            class="input-deco" name="number_of_members"
+                                                            style="margin-left: 50px;">
+                                                            <option value=""></option>
+                                                            <option value="One">1</option>
+                                                            <option value="Two">2</option>
+                                                            <option value="Three">3</option>
+                                                            <option value="Four">4</option>
+                                                            <option value="Five">5</option>
+                                                            <option value="Six">6</option>
+                                                            <option value="Seven">7</option>
+                                                            <option value="Eight">8</option>
+                                                            <option value="None">9</option>
+                                                            <option value="Ten">10</option>
+
+                                                        </select>
+
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="submit-buttons">
+                                                <div>
+                                                    <ul class="buttons-wrap">
+
+                                                        <li class="action-buttons"><button type="submit"
+                                                                id="continue-button">Continue</button>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+
+                        <!-- Chinni Code ended  -->
+                        <!--   Madhavi Code Starts here  -->
+
+
+
+                        <form  [formGroup]='Movableform' (ngSubmit)="submit2()" validate *ngIf="wizardStepExpandState[1]">
+                            <!-- <div> Step 2</div> -->
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="tab-content" id="main_form">
+                                        <div class="card">
+                                          <div class = "first_item">
+                                            <div>
+                                                <label>Does the applicant's family own the house they live in
+                                                    ?</label><br>
+                                                <input class="radio1" type="radio" class="radioButtons" checked value = "Yes"
+                                                    name="correct" (click)="House(0)">Yes
+                                                <input class="radio1" type="radio" name="correct" checked value = "No"
+                                                    (click)="House(1)" />No
+                                            </div>
+
+                                            <!-- Suppose they don't have own house -->
+                                            
+                                            <div id="rent" class = "items">
+                                              
+                                                <p>Monthly Rent for the house:</p>
+                                                <input formControlName="applicantRentHouse"class="input-deco"  type="number"
+                                                 class="input-deco"  min = "0"/>
+                                                 <span class="validation-error" *ngIf="(MovableformSubmitted || Movableform.controls.applicantRentHouse.touched) && Movableform.controls.applicantRentHouse.errors?.required">This field is required</span>
+                                              </div>
+                                            </div>
+                                            <!-- Suppose they have own house -->
+                                            
+                                            <div id = "items1" class = "items">
+                                              <!-- <div class = "text2"> -->
+                                                <div>
+                                                  <p>Market value of house applicant owned in Rs:</p>
+
+                                                   <input type="number" formControlName="applicantOwnhouse"class = "input-deco" min = "0" />
+                                                    <span class="validation-error" *ngIf="(MovableformSubmitted || Movableform.controls.applicantOwnhouse.touched) && Movableform.controls.applicantOwnhouse.errors?.required">This field is required</span>
+
+                                                </div>
+                                                <div>
+                                                    <p>Dimensions of house applicant is living house: </p>
+                                                    <input type="number" formControlName="applicantOwnHouse" class = "input-deco" min = "0" />
+                                                    <span class="validation-error" *ngIf="(MovableformSubmitted || Movableform.controls.applicantOwnHouse.touched) && Movableform.controls.applicantOwnHouse.errors?.required">This field is required</span>
+
+                                                </div>
+                                                <!-- </div> -->
+                                            </div>
+                                            <!-- land -->
+                                            
+                                            <div id="land">
+                                                <label>Does the Applicant's family own land?</label> <br>
+                                                <input type="radio" name="home" (click)="land(0)" />Yes
+                                                <input class="radio1" type="radio" name="home" (click)="land(1)" />No
+                                            </div>
+                                            <div id="dimension" class="items">
+                                              <div>
+                                                <p id="land1">Dimension of land</p>
+                                                <input type="number"formControlName="applicantLand" class="input-deco" min = "0"/>
+                                                <span class="validation-error" *ngIf="(MovableformSubmitted || Movableform.controls.applicantLand.touched) && Movableform.controls.applicantLand.errors?.required">This field is required</span>
+                                                </div>
+                                                 <div>
+                                                    <label>Market value of land owned in Rs:</label><br>
+                                                    <input type="number"formControlName="applicantland" class="input-deco"min = "0" />
+                                                    <span class="validation-error" *ngIf="(MovableformSubmitted || Movableform.controls.applicantland.touched) && Movableform.controls.applicantland.errors?.required">This field is required</span>
+
+                                                 </div>
+                                             
+                                                <!-- <div id="plants"> -->
+
+                                                <div id="plants">
+                                                    <label>Does the applicant's family grow anything on the
+                                                        land</label><br>
+                                                    <input type="radio" name="plants" (click)="field(0)" />Yes
+                                                    <input class="radio1" type="radio" name="plants"
+                                                        (click)="field(1)" />No
+
+                                                </div>
+
+                                                <div id="field1" class="items">
+                                                  <div>
+                                                    <label>Enter the annual income of field</label><br>
+                                                    <input type="number" formControlName="applicantfield" class="input-deco" min = "0" />
+                                                    <span class="validation-error" *ngIf="(MovableformSubmitted || Movableform.controls.applicantfield.touched) && Movableform.controls.applicantfield.errors?.required">This field is required</span>
+
+                                                </div>
+                                            </div>
+                                            </div>
+                                            
+                                            <!-- consumer durable owned -->
+                                            <div id="durable">
+                                                <label>
+                                                    Consumer durables owned?
+                                                </label><br>
+
+                                                <input id="checkbox" type="checkbox" name="things" />Fridge
+                                                <input class="things" type="checkbox" name="things" />Washing machine
+                                                <input class="things" type="checkbox" name="things" />Mixer
+                                                <input class="things" type="checkbox" name="things" />TV
+                                                <input class="things" type="checkbox" name="things" />Others
+                                            </div>
+                                            <!-- vehicles owned -->
+
+                                            <div id="vehicles">
+                                                <label>
+                                                    Vehicles owned?
+                                                </label><br>
+                                                <!-- <label>  -->
+                                                <input type="checkbox" id="no_vehicles" name="things"
+                                                    (click)="checkVehicle()" min = "0"/>No
+                                                <input class="things" type="checkbox" id="bike" name="things"
+                                                    (click)="checkVehicle()" min = "0"/>Bike
+                                                <input type="checkbox" class="things" id="car" name="things"
+                                                    (click)="checkVehicle()" min = "0"/>Car
+                                                <input class="things" type="checkbox" name="things" id="Earth_Mover"
+                                                    (click)="checkVehicle()" min = "0"/>Earth Mover
+                                                <input class="things" type="checkbox" name="things" id="Tractor"
+                                                    (click)="checkVehicle()" min = "0"/>Tracktor
+                                                <!-- </label> -->
+                                            </div>
+                                            <div class = "vehicles">
+                                            <div id="car1" class="items">
+                                                <p>Enter the Monthly cost for the car fuel</p><br>
+
+                                                <input type="number" formControlName="applicantcar" class="input-deco" min = "0"/>
+                                                <span class="validation-error" *ngIf="(MovableformSubmitted || Movableform.controls.applicantcar.touched) && Movableform.controls.applicantcar.errors?.required">This field is required</span>
+
+                                            </div>
+                                            <div id="bike1" class="items">
+                                                <p>Enter the Monthly cost for the Bike fuel</p><br>
+                                                <input type="number" formControlName="applicantbike" class="input-deco" min = "0"/>
+                                                <span class="validation-error" *ngIf="(MovableformSubmitted || Movableform.controls.applicantbike.touched) && Movableform.controls.applicantbike.errors?.required">This field is required</span>
+
+                                            </div>
+                                            <div id="Earth_Mover_1" class="items">
+                                                <p>Enter the Monthly cost for the Earth Mover fuel</p><br>
+                                                <input type="number" formControlName="applicantmover" class="input-deco"min = "0" />
+                                                <span class="validation-error" *ngIf="(MovableformSubmitted || Movableform.controls.applicantmover.touched) && Movableform.controls.applicantmover.errors?.required">This field is required</span>
+
+                                            </div>
+                                            <div id="Tractor_1" class="items">
+                                                <p>Enter the Monthly cost for the Tracktor fuel</p><br>
+                                                <input type="number" formControlName="applicantTractor" class="input-deco" min = "0"/>
+                                                <span class="validation-error" *ngIf="(MovableformSubmitted || Movableform.controls.applicantTractor.touched) && Movableform.controls.applicantTractor.errors?.required">This field is required</span>
+
+                                            </div>
+                                            <div id="no_vehicles1" class="items">
+                                                <div>No Vehicles</div>
+
+                                            </div>
+                                            </div>
+
+                                            <div class="submit-buttons">
+                                                <div>
+                                                    <ul class="buttons-wrap">
+                                                        <li class="action-buttons"><button id="back-button"
+                                                                (click)="changeSection(1)">Back</button>
+                                                        </li>
+                                                        <li class="action-buttons"><button type="submit"
+                                                                id="continue-button" [disabled]="!form.valid"
+                                                                (click)="changeSection(3)">Continue</button>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+
+                        <!--    madhavi code ended here -->
+
+                       
+
+                        <!-- Venkys Code step4 -->
+                        <form *ngIf="wizardStepExpandState[2]" [formGroup] = "Incomeform" (ngSubmit)="submit4()" >
+                            <div class="card" >
+                                <div class="card-body">
+                                    <div class="tab-content" id="main_form">
+                                        <div class="card">
+                                            <label class="labelform">How does the family earn its
+                                                income?</label>
+                                            <div class="inside-form1">
+                                                <input type="checkbox" id="value1" name="value1" (click)="myFunction()"
+                                                    value="informal" [(ngModel)]="bChecked" (change)="onCheckboxChagen($event, 'Blogs')">
+                                                <label for="value1">informal</label><br>
+                                                <input type="checkbox" id="value2" name="value2" value="formal"
+                                                    (click)="handleformal()" [(ngModel)]="wChecked" (change)="onCheckboxChagen($event, 'Web')"/>
+                                                <label for="value2">formal/salaried</label><br>
+                                                <input type="checkbox" id="value3" name="value3" value="farmer"
+                                                    (click)="handlefarm()" [(ngModel)]="oChecked" (change)="onCheckboxChagen($event, 'Online News')">
+                                                <label for="value3">farmer</label><br>
+                                                <input type="checkbox" id="value4" name="value4" value="livestock"
+                                                    (click)="handlelivestock()" />
+                                                <label for="value4">livestock</label><br>
+                                                <input type="checkbox" name="value5" id="value5" value="rent"
+                                                    (click)="handlevechiclerent()">
+                                                <label for="value5">vechicle rent</label><br>
+                                            </div>
+                                            <div class="type-work">
+                                                <label>How many members of the applicant's family
+                                                    are working?</label><br>
+                                                <input class="input-type-workers input-deco" type="number" />
+                                            </div>
+                                            <div id="informal">
+                                                <div>
+                                                    <label>How many in informal labours?</label><br>
+                                                    <input class="input-informal input-deco" type="number" />
+                                                </div>
+
+                                                <div>
+                                                    <label>If informal employment gives average
+                                                        daily
+                                                        labour of all members combined?</label><br>
+                                                    <input class="input-informal-average-daily input-deco"
+                                                        type="number" />
+                                                </div>
+
+                                                <div>
+                                                    <label>Average no. of days of employment in a
+                                                        month</label><br>
+                                                    <input class="input-informal-no-days-month input-deco"
+                                                        type="number" />
+                                                </div>
+
+
+                                            </div>
+
+                                            <!-- Formal or salaried -->
+                                            <div id="formal">
+                                                <div class="formal-howmany">
+                                                    <label>How many members are salaried
+                                                        employees?</label><br>
+
+                                                    <select class="input-deco">
+                                                        <option>Select any one option</option>
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                        <option>5</option>
+                                                        <option>6</option>
+                                                        <option>7</option>
+                                                        <option>8</option>
+                                                        <option>9</option>
+                                                        <option>10</option>
+
+
+                                                    </select>
+                                                </div>
+
+                                                <div>
+                                                    <label>Please fill
+                                                        the total monthly salary of the total formal
+                                                        members</label><br>
+                                                    <input class="input-informal-no-days-month input-deco"
+                                                        type="number" />
+                                                </div>
+                                                <div>
+                                                    <label>Take a proof where a photo of the
+                                                        salary slip / bank statement.
+                                                    </label><br>
+                                                    <input class="input-informal-no-days-month input-deco"
+                                                        type="file" />
+                                                </div>
+
+
+                                            </div>
+                                            <!-- farmer -->
+                                            <div id="farmer">
+                                                <label class="labelform">Crops grown in farm
+                                                    ?</label>
+                                                <div class="inside-form1">
+                                                    <input type="checkbox" id="groundnut" name="value1"
+                                                        value="groundnut">
+                                                    <label for="value1">Groundnut</label><br>
+                                                    <input type="checkbox" id="ragi" name="value2" value="ragi" />
+                                                    <label for="value2">ragi</label><br>
+                                                    <input type="checkbox" id="jower" name="value3" value="jowar">
+                                                    <label for="value3">jowar</label><br>
+                                                    <input type="checkbox" name="rice" value="rice">
+                                                    <label for="value4">rice</label><br>
+                                                    <input type="checkbox" name="vegetables" value="vegetables">
+                                                    <label for="value4">vegetables</label><br>
+                                                    <input type="checkbox" name="others" value="others">
+                                                    <label for="value4">others's</label><br>
+                                                </div>
+                                                <div id="farmer-form2">
+
+                                                    <div>
+                                                        <label>Unit of measurement</label>
+                                                        <select class="input-deco">
+                                                            <option value="select">select</option>
+                                                            <option value="quintal">quintal</option>
+                                                            <option value="ton">ton</option>
+                                                            <option value="sack">sack</option>
+                                                        </select>
+                                                    </div>
+                                                    <div>
+                                                        <label>Place of sale</label>
+                                                        <select class="input-deco">
+                                                            <option value="select">select</option>
+                                                            <option value="government">Government
+                                                            </option>
+                                                            <option value="private">private</option>
+                                                            <option value="both">both</option>
+                                                        </select>
+                                                    </div>
+                                                    <div>
+                                                        <label>Yield in the previous financial year
+                                                            in
+                                                            Rs ?</label><br>
+                                                        <input class="input-deco" type="number" />
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                        <!-- Live stack -->
+                                        <div id="livestock">
+                                            <label class="labelform">Lifestocks grown/ reared
+                                            </label>
+                                            <div class="livestock-form1">
+                                                <input type="checkbox" id="cow" name="value1" value="cow"
+                                                    (click)="handlecow()">
+                                                <label for="value1">Cow</label><br>
+                                                <input type="checkbox" id="goat" name="value2" value="goat"
+                                                    (click)="handleautofill($event)" />
+                                                <label for="value2">goat</label><br>
+                                                <input type="checkbox" id="sheep" name="value3" value="sheep"
+                                                    (click)="handleautofill($event)">
+                                                <label for="value3">sheep</label><br>
+                                                <input type="checkbox" id="chicken" name="chicken" value="chicken"
+                                                    (click)="handleautofill($event)" />
+                                                <label for="value4">chicken</label><br>
+                                                <input type="checkbox" id="fish" name="fish" value="fish"
+                                                    (click)="handleautofill($event)">
+                                                <label for="value4">fish</label><br>
+                                                <input type="checkbox" id="pig" name="pig" value="pig"
+                                                    (click)="handleautofill($event)">
+                                                <label for="value4">pig</label><br>
+                                            </div>
+                                            <div id="livestock-form2">
+                                                <div>
+                                                    <label>No of livestock owned</label><br>
+                                                    <input type="number" class="input-deco" id="auto-fill-value" />
+                                                </div>
+                                                <div>
+                                                    <label>Earning from livestock ( non
+                                                        cow)</label><br>
+                                                    <input type="number" class="input-deco" />
+                                                </div>
+
+                                            </div>
+
+                                            <div id="livestock-cow-form3">
+                                                <div class="livestock-form1">
+                                                    <div>
+                                                        <label>Number of cows x daily
+                                                            yield per cow of milk</label>
+                                                        <input type="number" class="input-deco">
+                                                    </div>
+                                                    <div>
+                                                        <label>Selling price for one litre of milk
+                                                            from
+                                                            cow</label>
+                                                        <input type="number" class="input-deco">
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                        <!-- Vechica rent -->
+                                        <div id="vechicle-rent">
+                                            <div class="vehicle-howmany">
+                                                <label>How many vechicles owned?</label><br>
+
+                                                <select class="input-deco">
+                                                    <option>Select any one option</option>
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                    <option>5</option>
+                                                    <option>6</option>
+                                                    <option>7</option>
+                                                    <option>8</option>
+                                                    <option>9</option>
+                                                    <option>10</option>
+
+
+                                                </select>
+                                            </div>
+
+                                            <div>
+                                                <label>Please fill
+                                                    the total monthly income from Vechicle rent
+                                                    (exluding fuel)</label><br>
+                                                <input class="input-vechicle-income input-deco" type="number" />
+                                            </div>
+
+
+                                        </div>
+                                        <div class="submit-buttons">
+                                            <div>
+                                                <ul class="buttons-wrap">
+                                                    <li class="action-buttons"><button id="back-button"
+                                                            (click)="changeSection(2)">Back</button>
+                                                    </li>
+                                                    <li class="action-buttons"><button type="submit"
+                                                            id="continue-button" 
+                                                            >Continue</button>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+                        <!-- VENKY ended -->
+
+
+                        <!-- SECTION FOUR -->
+                        <form *ngIf="wizardStepExpandState[3]">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="tab-content" id="main_form">
+                                        <div class="card" class="expensive">
+                                            <div>
+                                                <label>Average value of the last three months
+                                                    electricity bills. * Surveyor to check the physical
+                                                    bills of the last three months.
+                                                </label><br />
+                                                <input type="number" class="input-deco" />
+                                            </div>
+                                            <div id="dependency-fields">
+                                                <div id="is-Tv-has">
+                                                    <label>Please
+                                                        gather TV monthly cable bill & give the bill value
+                                                        in Rs.</label><br />
+                                                    <input class="input-deco" type="number" />
+                                                </div>
+                                                <div id="is-paid-hostal">
+                                                    <label>Please get
+                                                        monthly fees paid for the hostel in Rs.</label><br />
+                                                    <input type="number" class="input-deco" />
+                                                </div>
+                                            </div>
+                                            <div id="phones">
+                                                <div>
+                                                    <label>How many mobile phone’s are there in the
+                                                        applicant's family?
+                                                    </label><br />
+                                                    <input type="number" class="input-deco" />
+                                                </div>
+
+                                                <div>
+                                                    <label>Total reacharge value of the mobile phone cost in a month
+                                                    </label><br />
+                                                    <input type="number" class="input-deco" />
+                                                </div>
+                                                <div>
+                                                    <label>How many of the mobile phones are
+                                                        smartphones?
+                                                    </label><br />
+                                                    <input type="number" class="input-deco" />
+                                                </div>
+                                            </div>
+                                            <div id="phone-bills">
+
+                                                <div>
+                                                    <label>Please provide brand name and model
+                                                        numbers of the smartphones owned.
+                                                    </label><br />
+                                                    <input type="text" class="input-deco" />
+                                                </div>
+                                                <div>
+                                                    <label>please mention the monthly
+                                                        rent of the house in Rs.
+                                                    </label><br />
+                                                    <input type="number" class="input-deco" />
+                                                </div>
+
+
+                                            </div>
+                                            <div id="loan">
+                                                <div>
+                                                    <label>The cost of Vechicle fuel per month in Rs.</label><br />
+                                                    <input type="number" class="input-deco" />
+                                                </div>
+                                                <div>
+
+
+                                                    <label>Does the family have any loan outstanding?</label><br>
+                                                    <div class="inside-form1">
+
+                                                        <label for="loan-yes">Yes</label><br>
+                                                        <input type="radio" id="" name="loans" value="YES"
+                                                            (click)="loanOutStanding(1)" />
+
+
+                                                        <label for="loan-no">No</label><br>
+                                                        <input type="radio" id="" name="loans" value="NO"
+                                                            (click)="loanOutStanding(0)">
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="loan-input-field">
+                                                <div>
+                                                    <label>If ‘yes’ can the monthly payout towards
+                                                        repaying the loan be given in Rs.</label><br />
+                                                    <input type="number" class="input-deco" />
+                                                </div>
+                                                <div>
+                                                    <label>Take the monthly payout pictures towards
+                                                        repaying the loan be given in Rs</label><br />
+                                                    <input type="file" class="input-deco" />
+                                                </div>
+                                            </div>
+
+
+                                            <div>
+                                                <label>How many of applicants siblings are studying?</label><br />
+                                                <select class="input-deco">
+                                                    <option>Select any one option</option>
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                    <option>5</option>
+                                                    <option>6</option>
+                                                    <option>7</option>
+                                                    <option>8</option>
+                                                    <option>9</option>
+                                                    <option>10</option>
+                                                </select>
+                                            </div>
+                                            <div>Based on input above it should ask what is the
+                                                study
+                                            </div>
+                                            <div>
+                                                <label>Annual consolidated value of the fees to be
+                                                    paid for other children in Rs.</label><br />
+                                                <input type="number" class="input-deco" />
+                                            </div>
+                                            <div>
+
+
+                                                <label>Is the family receiving assistance for any other
+                                                    siblings' education?</label><br>
+                                                <div class="inside-form1">
+
+                                                    <label for="assistance">Yes</label><br>
+                                                    <input type="radio" id="" name="assistance" value="YES"
+                                                        (click)="assistence(1)" />
+
+
+                                                    <label for="assistence-no">No</label><br>
+                                                    <input type="radio" id="" name="assistance" value="NO"
+                                                        (click)="assistence(0)">
+
+
+                                                </div>
+
+                                            </div>
+
+                                            <div id="assistence-form-yes">
+
+                                                <div>
+                                                    <label>If yes then show the total value of assistance received. Or a
+                                                        loan taken.</label><br />
+                                                    <input type="number" class="input-deco" />
+
+                                                </div>
+                                                <div id="assistence-yes-input">
+                                                    <label> The pictures assistance
+                                                        received</label><br />
+                                                    <input type="file" class="input-deco" />
+                                                </div>
+
+                                            </div>
+
+                                            <div id="assistence-form-no">
+                                                <label>How are they managing the same, it
+                                                    should be filled in a text field.
+                                                </label><br />
+                                                <input type="text" class="input-deco" />
+                                            </div>
+
+                                            <div id="groceries">
+                                                <div>
+                                                    <label>How does the family procure monthly
+                                                        groceries?
+                                                    </label>
+
+                                                    <div class="inside-form1">
+                                                        <input type="checkbox" id="Ration" name="Ration" value="Ration">
+                                                        <label for="Ration">Ration</label><br>
+                                                        <input type="checkbox" id="kirana store" name="kirana store"
+                                                            value="kirana store" />
+                                                        <label for="kirana store"> kirana store</label><br>
+                                                        <input type="checkbox" id="farm product" name="farm product"
+                                                            value="farm product">
+                                                        <label for="value3">farm product</label><br>
+
+                                                    </div>
+                                                </div>
+
+
+                                                <div>
+                                                    <label>Monthly expense for procuring groceries in Rs.
+                                                    </label><br />
+                                                    <input type="number" class="input-deco" />
+                                                </div>
+
+
+                                            </div>
+                                            <div id="live-stock-procuring">
+                                                <div>
+                                                    <label>Monthly cost of rearing livestock.
+                                                    </label><br />
+                                                    <input type="number" class="input-deco" />
+                                                </div>
+
+                                                <div>
+                                                    <label>Annualized cost of procuring seeds and
+                                                        fertilizers in Rs.
+                                                    </label><br />
+                                                    <input type="number" class="input-deco" />
+                                                </div>
+                                            </div>
+
+                                            <div class="submit-buttons">
+                                                <div>
+                                                    <ul class="buttons-wrap">
+                                                        <li class="action-buttons"><button id="back-button"
+                                                                (click)="changeSection(3)">Back</button>
+                                                        </li>
+                                                        <li class="action-buttons"><button type="submit"
+                                                                id="continue-button" 
+                                                                (click)="changeSection(5)">Continue</button>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+
+                        <form *ngIf="wizardStepExpandState[4]" [formGroup] = "section5" validate>
+
+
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="tab-content" id="main_form">
+                                        <div class="card" class="expensive">
+                                            <div>
+                                                <label>What is the assessment of the surveyor on the
+                                                    annual income of the family? Please provide a
+                                                    range
+                                                </label><br />
+                                                <input type="number"  formControlName = "annual_income" class="input-deco" />
+                                                <span class="validation-error" *ngIf="(section5Submitted || section5.controls.annual_income.touched) && section5.controls.annual_income.errors?.required">This field is mandatory</span>
+
+                                            </div>
+
+                                            <div>
+                                                <label>Any other comments the surveyor wishes to
+                                                    give swadha foundation on the Applicant’s &
+                                                    their family condition?
+                                                </label><br />
+                                                <input type="text" class="input-deco" formControlName = "additional_comments" name = "additional_comments" />
+                                                <span class="validation-error" *ngIf="(section5Submitted || section5.controls.additional_comments.touched) && section5.controls.additional_comments.errors?.required">This field is mandatory</span>
+                                                
+                                            </div>
+                                            
+                                            <div class="submit-buttons">
+                                                <div>
+                                                    <ul class="buttons-wrap">
+                                                        <li class="action-buttons"><button id="back-button"
+                                                                (click)="setvalue()">Back</button>
+                                                        </li>
+                                                        <li class="action-buttons"><button type="submit"
+                                                                id="continue-button" 
+                                                                (click)="changeSection(6)">Continue</button>
+                                                        </li>
+                                                    </ul>
+
+
+                                                </div>
+                                            </div>
+
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            
+                        </form>
+
+                        <form *ngIf="wizardStepExpandState[5]">
+                            <!-- <app-preview> </app-preview> -->
+
+                            <!-- <form class="content"> -->
+                                <div class="container p-0">
+                                  <!-- <h1 class="h3 mb-3">{{ student.studentFirstName | titlecase}} {{student.studentMiddleName | titlecase}} {{student.studentLastName | titlecase}}</h1> -->
+                                  <div class="row">
+                                    <div class="col-md-12 col-xl-12">
+                                      <div class="card mb-3">
+                                        <div class="card-body text-center">
+                                          <div class="row profile-img">
+                                            <div class="col-md-6 text-left ">
+                                              <img src="" alt="Student Photo" class="stud-img img-fluid rounded-circle mb-2" width="128" height="128" />
+                                              <div class="d-inline-block " style="margin-left: 15px;">
+                                                <!-- <h5 class="card-title mb-0">{{ student.studentFirstName | titlecase}} {{student.studentMiddleName | titlecase}} {{student.studentLastName | titlecase}}</h5>
+                                                <div class="text-muted role mb-2">{{student.studentId}}</div> -->
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                              
+                                    <div class="col-md-12 col-xl-12">
+                              
+                                      <div class="container user-profile">
+                                        <ul class="nav nav-tabs">
+                                          <li><a href="#tab1" data-toggle="tab" class="active">Student details</a></li>
+                                          <li><a href="#tab2" data-toggle="tab">Academic</a></li>
+                                          <li><a href="#tab3" data-toggle="tab">Swadha Docs</a></li>
+                                          <li><a href="#tab4" data-toggle="tab">Assessments</a></li>
+                                          <li><a href="#tab5" data-toggle="tab">Feedback</a></li>
+                                        </ul>
+                              
+                                        <div class="tab-content">
+                                          <div class="tab-pane active" id="tab1" style="background-color: white;" role="tabpanel">
+                                            <div class="container-fluid p-0">
+                              
+                                            </div>
+                              
+                                            <div class="col-md-12 col-xl-12">
+                                              <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                  <div class="modal-content">
+                                                    <div class="modal-header">
+                                                      <h5 class="modal-title" id="exampleModalLabel">Original Document</h5>
+                                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                      </button>
+                                                    </div>
+                                                    <div class="modal-body text-center">
+                                                      <p>Photo Id:</p>
+                                                      <img src="../../assets/img/user.jpg">
+                                                      <p>Marksheet-10th</p>
+                                                      <!-- <img class="w-100" src="img/main-qimg-07074c22559450133dd3103d2748f85b.jpg"> -->
+                              
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              <div class="container user-profile">
+                                                <div class="application-sumary mydiv">
+                                                  <h2>Applicant &amp; Family Details</h2>
+                                                  <div class="row">
+                                                    <div class="col-md-4 col-sm-12">
+                                                      <label class="label-primary">First Name :</label>
+                                                    </div>
+                                                    <div class="col-md-4 col-sm-12">
+                                                      <label class="label-primary">Middle Name :</label>
+                                                    </div>
+                                                    <div class="col-md-4 col-sm-12">
+                                                      <label class="label-primary">Last Name :</label>
+                                                    </div>
+                                                  </div>
+                                                  <div class="row mydiv">
+                                                    <div class="col-md-4 col-sm-12">
+                                                      <label class="label-primary">Gender :</label>
+                                                    </div>
+                                                    <div class="col-md-4 col-sm-12">
+                                                      <label class="label-primary">Date of Birth :</label>
+                                                    </div>
+                                                    <div class="col-md-4 col-sm-12">
+                                                      <label class="label-primary">Place Of Birth (Optional) :</label>
+                                                      <span>Kolkata</span>
+                                                    </div>
+                                                  </div>
+                              
+                              
+                              
+                                                </div>
+                                                <div class="row mydiv mb-3">
+                                                  <div class="col-md-4 col-sm-12">
+                                                    <label class="label-primary">Nationality :</label><br>
+                                                  </div>
+                                                  <div class="col-md-4 col-sm-12">
+                                                    <label class="label-primary">Aadhaar :</label><br>
+                                                  </div>
+                                                  <div class="col-md-4 col-sm-12">
+                                                    <label class="label-primary">Email Id :</label><br>
+                                                  </div>
+                                                </div>
+                                                <div class="row mydiv mb-3">
+                                                  <div class="col-md-4 col-sm-12">
+                                                    <label class="label-primary">Mobile Number :</label><br>
+                                                  </div>
+                                                  <div class="col-md-4 col-sm-12">
+                                                    <label class="label-primary">Alternate Mobile Number :</label><br>
+                                                  </div>
+                                                  <div class="col-md-4 col-sm-12"></div>
+                                                </div>
+                                                <div class="row mydiv mb-3">
+                                                  <div class="col-md-4 col-sm-12">
+                                                    <label class="label-primary">Number Of Male Adults :</label><br>
+                                                  </div>
+                                                  <div class="col-md-4 col-sm-12">
+                                                    <label class="label-primary">Number Of Female Adults :</label><br>
+                                                  </div>
+                                                  <div class="col-md-4 col-sm-12">
+                                                    <label class="label-primary">Number Of Male Children :</label><br>
+                                                  </div>
+                                                </div>
+                                                <div class="row mydiv mb-3">
+                                                  <div class="col-md-4 col-sm-12">
+                                                    <label class="label-primary">Number Of Female Children :</label><br>
+                                                  </div>
+                                                  <div class="col-md-4 col-sm-12">
+                                                    <label class="label-primary">Special Family Condition :</label><br>
+                                                  </div>
+                                                  <div class="col-md-4 col-sm-12">
+                                                    <label class="label-primary">Family members studying :</label><br>
+                                                  </div>
+                                                  <div class="col-md-4 col-sm-12"></div>
+                                                </div>
+                                                <h2>Family Finance details</h2>
+                                                <!-- <div class="row mydiv mb-3">
+                                                  <div class="col-md-4 col-sm-12">
+                                                    <label class="label-primary">Name of Father :</label><br>
+                                                    <span>{{fatherDetails?.studentRelativeFirstName}}</span>
+                                                  </div>
+                                                  <div class="col-md-4 col-sm-12">
+                                                    <label class="label-primary">Age of Father :</label><br>
+                                                    <span>{{getAge(fatherDetails.studentRelativeDob)}}</span>
+                                                  </div>
+                                                </div>
+                                                <div class="row mydiv mb-3">
+                                                  <div class="col-md-4 col-sm-12">
+                                                    <label class="label-primary">Name of Mother :</label><br>
+                                                    <span>{{motherDetails?.studentRelativeFirstName}}</span>
+                                                  </div>
+                                                  <div class="col-md-4 col-sm-12">
+                                                    <label class="label-primary">Age of Mother :</label><br>
+                                                    <span>{{getAge(motherDetails?.studentRelativeDob)}}</span>
+                                                  </div> -->
+                                                  <div class="table-responsive">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                            <tr>
+                                                                <th></th>
+                                                                <th>Relationship</th>
+                                                                <th>Name</th>
+                                                                <th>Age</th>
+                                                                <th>Bread Winner?</th>
+                                                                <th>Employment details</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody >
+                                                            <tr>
+                                                              <!-- <td style="width: 1%;">{{i+1}}</td>
+                                                              <td style="width: 13%;"><div>{{relative.studentRelative}}</div></td>
+                                                              <td style="width: 35%;"><div>{{relative.studentRelativeFirstName}}</div></td> -->
+                                                              <!-- <td style="width: 10%;"><div>{{relative.age}}</div></td> -->
+                                                              <!-- <td style="width: 10%;"><div>{{50}}</div></td>
+                                                              <td style="width: 16%;"><div>{{relative.studentRelativeIsBreadWinner}}</div></td>
+                                                              <td style="width: 30%;"><div>{{relative.studentRelativeEmployment}}</div></td> -->
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                  </div>
+                                                <div class="row mydiv mb-3">
+                                                  <div class="col-md-4 col-sm-12">
+                                                    <label class="label-primary">Is the student receiving any other form of scholarship :</label><br>
+                                                  </div>
+                              
+                                                  <div class="col-md-4 col-sm-12">
+                                                    <label class="label-primary">Annual scholarship amount :</label><br>
+                                                  </div>
+                                                  <div class="col-md-4 col-sm-12">
+                                                    <label class="label-primary">Name of organization providing scholarship :</label><br>
+                                                  </div>
+                                                </div>
+                                                <div class="row mydiv mb-3">
+                                                  <div class="col-md-4 col-sm-12">
+                                                    <label class="label-primary">Number of children in applicants family attending school :</label><br>
+                                                  </div>
+                              
+                                                  <div class="col-md-4 col-sm-12">
+                                                    <label class="label-primary">Employment details of applicants family members :</label><br>
+                                                  </div>
+                                                  <div class="col-md-4 col-sm-12">
+                                                    <label class="label-primary">Mention qualification of any adult(s) who has/have had any formal education :</label><br>
+                                                  </div>
+                                                </div>
+                                                <div class="row mydiv mb-3">
+                                                  <div class="col-md-4 col-sm-12">
+                                                    <label class="label-primary">Family Own Land? :</label><br>
+                                                  </div>
+                              
+                                                  <div class="col-md-4 col-sm-12">
+                                                    <label class="label-primary">Unit Of Measurement :</label><br>
+                                                  </div>
+                              
+                                                  <div class="col-md-4 col-sm-12">
+                                                    <label class="label-primary">Land Dimension :</label><br>
+                                                  </div>
+                                                </div>
+                              
+                                                <div class="row mydiv mb-3">
+                                                  <div class="col-md-4 col-sm-12">
+                                                    <label class="label-primary">Value Of Land Property :</label><br>
+                                                  </div>
+                              
+                                                  <div class="col-md-4 col-sm-12">
+                                                    <label class="label-primary">Family Own House? :</label><br>
+                                                  </div>
+                              
+                                                  <div class="col-md-4 col-sm-12">
+                                                    <label class="label-primary">Unit Of Measurement :</label><br>
+                                                  </div>
+                                                </div>
+                                                <div class="row mydiv mb-3">
+                                                  <div class="col-md-4 col-sm-12">
+                                                    <label class="label-primary">House Dimension :</label><br>
+                                                  </div>
+                                                  <div class="col-md-4 col-sm-12">
+                                                    <label class="label-primary">Value Of House Property :</label><br>
+                                                  </div>
+                                                  <div class="col-md-4 col-sm-12">
+                                                    <label class="label-primary">Consumer durables owned :</label><br>
+                                                  </div>
+                                                </div>
+                                                <div class="row mydiv mb-3">
+                                                  <div class="col-md-4 col-sm-12">
+                                                    <label class="label-primary">Remarks :</label><br>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              <h2 class="pt-3">Additional Details</h2>
+                                              <div class="row mydiv mb-3">
+                                                <div class="col-md-4 col-sm-12">
+                                                  <label class="label-primary">Application Number :</label><br>
+                                                </div>
+                                                <div class="col-md-4 col-sm-12">
+                                                  <label class="label-primary">Manual student Id :</label><br>
+                                                </div>
+                                                <div class="col-md-4 col-sm-12">
+                                                  <label class="label-primary">Student Id :</label><br>
+                                                </div>
+                                                <div class="col-12">
+                                                  <label class="label-primary">Status :</label><br>
+                                                </div>
+                                              </div>
+                                              <div class="row mydiv mb-3">
+                                                <div class="col-md-4 col-sm-12">
+                                                  <label class="label-primary">Student Name As Per Bank Records :</label><br>
+                                                </div>
+                                                <div class="col-md-4 col-sm-12">
+                                                  <label class="label-primary">Name Of The Bank :</label><br>
+                                                </div>
+                                                <div class="col-md-4 col-sm-12">
+                                                  <label class="label-primary">Name Of The Branch :</label><br>
+                                                </div>
+                                              </div>
+                                              <div class="row mydiv mb-3">
+                                                <div class="col-md-4 col-sm-12">
+                                                  <label class="label-primary">Bank IFSC code :</label><br>
+                                                </div>
+                                                <div class="col-md-4 col-sm-12">
+                                                  <label class="label-primary">Student Account Number :</label><br>
+                                                </div>
+                                                <div class="col-md-4 col-sm-12">
+                                                  <label class="label-primary">Additional Details Type :</label><br>
+                                                </div>
+                                              </div>
+                                              <div class="clearfix"></div>
+                                            </div>
+                                          </div>
+                                          <div class="tab-pane" id="tab2">
+                                            <div class="panel panel-default">
+                                              <div class="panel-heading">
+                                                <h4 class="panel-title">
+                                                  <a data-toggle="collapse" data-parent=".tab-pane" href="#collapseTwo">
+                                                    Student Info
+                                                  </a>
+                                                </h4>
+                                              </div>
+                                              <div id="collapseTwo" class="panel-collapse collapse">
+                                                <div class="panel-body">
+                                                  <div *ngFor="let yearIndex of academicYears">
+                                                    <div class="row mydiv">
+                                                      <div class="col-6">
+                                                        <table class="table table-striped">
+                                                          <thead>
+                                                            <tr>
+                                                              <td class="label-primary">Academic Year:</td>
+                                                              <!-- <td colspan="3">{{student.modStudentAcademicRecordList[yearIndex].academicYear}}</td> -->
+                                                            </tr>
+                                                            <tr>
+                                                              <td class="label-primary">Public Exam:</td>
+                                                              <td colspan="2">
+                                                              </td>
+                                                            </tr>
+                                                            <tr>
+                                                              <td class="label-primary">Institution:</td>
+                                                              <td colspan="2">
+                                                              </td>
+                                                            </tr>
+                                                            <tr>
+                                                              <td class="label-primary">Course:</td>
+                                                              <td colspan="2">
+                                                              </td>
+                                                            </tr>
+                                                            <tr>
+                                                              <td class="label-primary">Subject Details: </td>
+                                                            <tr>
+                                                              <td class="label-primary">Subject</td>
+                                                              <!-- <td>Name</td> -->
+                                                              <td class="label-primary">Score</td>
+                                                            </tr>
+                                                          </thead>
+                                                          <tbody>
+                                                            <tr *ngFor="let subject of student.modStudentAcademicRecordList[yearIndex].modStudentAcademicSubjectRecordList">
+                                                             
+                                                              
+                                                            </tr>
+                                                          </tbody>
+                                                        </table>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <div class="tab-pane" id="tab3">
+                                            <div class="panel panel-default">
+                                              <div id="collapseThree" class="panel-collapse collapse">
+                                                <div class="panel-body">
+                                                  <h2 class="pt-3">Student Documents</h2>
+                                                  <div class="row" *ngFor="let document of modStudentDocumentMaster">
+                                                    <div>
+                                                      <div class="col-md-6 col-sm-12">
+                                                        <label class="col-form-label">Document Type:</label><span>{{document.studentDocumentType}}</span>
+                                                      </div>
+                                                      <div class="col-md-6 col-sm-12">
+                                                        <label class="col-form-label">Document Name:</label> <a  routerLink= '/student/profile' (click)="openDialog(document.studentDocument)">{{document.studentDocumentName + '   '+ document.studentDocumentSize+'KB'}}</a>
+                                                      </div>     
+                                                    </div>
+                                                 </div>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <div class="tab-pane" id="tab4">
+                                            <div class="panel panel-default">
+                                              <div class="panel-heading">
+                                                <h4 class="panel-title">
+                                                  <a data-toggle="collapse" data-parent=".tab-pane" href="#collapseFour">
+                                                    Relative's Info
+                                                  </a>
+                                                </h4>
+                                              </div>
+                                              <div id="collapseFour" class="panel-collapse collapse">
+                                                <div class="panel-body">
+                                                  Assessments coming soon!
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <div class="tab-pane" id="tab5">
+                                            <div class="panel panel-default">
+                                              <div class="panel-heading">
+                                                <h4 class="panel-title">
+                                                  <a data-toggle="collapse" data-parent=".tab-pane" href="#collapseFour">
+                                                  </a>
+                                                </h4>
+                                              </div>
+                                              <div id="collapseFour" class="panel-collapse collapse">
+                                                <div class="panel-body">
+                                                  Feedback coming soon!
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                            <!-- </form> -->
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+
+
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.1)" size="default" type="ball-spin-clockwise">
+    <!-- <p style="color: rgb(50, 50, 255)">Loading...</p> -->
+</ngx-spinner>

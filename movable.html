@@ -1,0 +1,186 @@
+<form [formGroup]='Movableform' (ngSubmit)="submit2()" validate *ngIf="wizardStepExpandState[1]">
+    <!-- <div> Step 2</div> -->
+    <div class="card">
+      <div class="card-body">
+        <div class="tab-content" id="main_form">
+          <div class="card">
+            <div class="first_item">
+              <div>
+                <label>Does the applicant's family own the house they live in
+                  ?</label><br>
+                <input class="radio1" type="radio" class="radioButtons" checked value="Yes" name="correct"
+                  (click)="House(0)">Yes
+                <input class="radio1" type="radio" name="correct" checked value="No" (click)="House(1)" />No
+              </div>
+
+              <!-- Suppose they don't have own house -->
+
+              <div id="rent" class="items">
+
+                <p>Monthly Rent for the house:</p>
+                <input formControlName="applicantRentHouse" class="input-deco" type="number"
+                  class="input-deco" min="0" />
+                <span class="validation-error"
+                  *ngIf="(MovableformSubmitted || Movableform.controls.applicantRentHouse.touched) && Movableform.controls.applicantRentHouse.errors?.required">This
+                  field is required</span>
+              </div>
+            </div>
+            <!-- Suppose they have own house -->
+
+            <div id="items1" class="items">
+              <!-- <div class = "text2"> -->
+              <div>
+                <p>Market value of house applicant owned in Rs:</p>
+
+                <input type="number" formControlName="applicantOwnhouse" class="input-deco" min="0" />
+                <span class="validation-error"
+                  *ngIf="(MovableformSubmitted || Movableform.controls.applicantOwnhouse.touched) && Movableform.controls.applicantOwnhouse.errors?.required">This
+                  field is required</span>
+
+              </div>
+              <div>
+                <p>Dimensions of house applicant is living house: </p>
+                <input type="number" formControlName="applicantOwnHouse" class="input-deco" min="0" />
+                <span class="validation-error"
+                  *ngIf="(MovableformSubmitted || Movableform.controls.applicantOwnHouse.touched) && Movableform.controls.applicantOwnHouse.errors?.required">This
+                  field is required</span>
+
+              </div>
+              <!-- </div> -->
+            </div>
+            <!-- land -->
+
+            <div id="land">
+              <label>Does the Applicant's family own land?</label> <br>
+              <input type="radio" name="home" (click)="land(0)" />Yes
+              <input class="radio1" type="radio" name="home" (click)="land(1)" />No
+            </div>
+            <div id="dimension" class="items">
+              <div>
+                <p id="land1">Dimension of land</p>
+                <input type="number" formControlName="applicantLand" class="input-deco" min="0" />
+                <span class="validation-error"
+                  *ngIf="(MovableformSubmitted || Movableform.controls.applicantLand.touched) && Movableform.controls.applicantLand.errors?.required">This
+                  field is required</span>
+              </div>
+              <div>
+                <label>Market value of land owned in Rs:</label><br>
+                <input type="number" formControlName="applicantland" class="input-deco" min="0" />
+                <span class="validation-error"
+                  *ngIf="(MovableformSubmitted || Movableform.controls.applicantland.touched) && Movableform.controls.applicantland.errors?.required">This
+                  field is required</span>
+
+              </div>
+
+              <!-- <div id="plants"> -->
+
+              <div id="plants">
+                <label>Does the applicant's family grow anything on the
+                  land</label><br>
+                <input type="radio" name="plants" (click)="field(0)" />Yes
+                <input class="radio1" type="radio" name="plants" (click)="field(1)" />No
+
+              </div>
+
+              <div id="field1" class="items">
+                <div>
+                  <label>Enter the annual income of field</label><br>
+                  <input type="number" formControlName="applicantfield" class="input-deco" min="0" />
+                  <span class="validation-error"
+                    *ngIf="(MovableformSubmitted || Movableform.controls.applicantfield.touched) && Movableform.controls.applicantfield.errors?.required">This
+                    field is required</span>
+
+                </div>
+              </div>
+            </div>
+
+            <!-- consumer durable owned -->
+            <div id="durable">
+              <label>
+                Consumer durables owned?
+              </label><br>
+
+              <input id="checkbox" type="checkbox" name="things" />Fridge
+              <input class="things" type="checkbox" name="things" />Washing machine
+              <input class="things" type="checkbox" name="things" />Mixer
+              <input class="things" type="checkbox" name="things" />TV
+              <input class="things" type="checkbox" name="things" />Others
+            </div>
+            <!-- vehicles owned -->
+
+            <div id="vehicles">
+              <label>
+                Vehicles owned?
+              </label><br>
+              <!-- <label>  -->
+              <input type="checkbox" id="no_vehicles" name="things" (click)="checkVehicle()" min="0" />No
+              <input class="things" type="checkbox" id="bike" name="things" (click)="checkVehicle()"
+                min="0" />Bike
+              <input type="checkbox" class="things" id="car" name="things" (click)="checkVehicle()"
+                min="0" />Car
+              <input class="things" type="checkbox" name="things" id="Earth_Mover" (click)="checkVehicle()"
+                min="0" />Earth Mover
+              <input class="things" type="checkbox" name="things" id="Tractor" (click)="checkVehicle()"
+                min="0" />Tracktor
+              <!-- </label> -->
+            </div>
+            <div class="vehicles">
+              <div id="car1" class="items">
+                <p>Enter the Monthly cost for the car fuel</p><br>
+
+                <input type="number" formControlName="applicantcar" class="input-deco" min="0" />
+                <span class="validation-error"
+                  *ngIf="(MovableformSubmitted || Movableform.controls.applicantcar.touched) && Movableform.controls.applicantcar.errors?.required">This
+                  field is required</span>
+
+              </div>
+              <div id="bike1" class="items">
+                <p>Enter the Monthly cost for the Bike fuel</p><br>
+                <input type="number" formControlName="applicantbike" class="input-deco" min="0" />
+                <span class="validation-error"
+                  *ngIf="(MovableformSubmitted || Movableform.controls.applicantbike.touched) && Movableform.controls.applicantbike.errors?.required">This
+                  field is required</span>
+
+              </div>
+              <div id="Earth_Mover_1" class="items">
+                <p>Enter the Monthly cost for the Earth Mover fuel</p><br>
+                <input type="number" formControlName="applicantmover" class="input-deco" min="0" />
+                <span class="validation-error"
+                  *ngIf="(MovableformSubmitted || Movableform.controls.applicantmover.touched) && Movableform.controls.applicantmover.errors?.required">This
+                  field is required</span>
+
+              </div>
+              <div id="Tractor_1" class="items">
+                <p>Enter the Monthly cost for the Tracktor fuel</p><br>
+                <input type="number" formControlName="applicantTractor" class="input-deco" min="0" />
+                <span class="validation-error"
+                  *ngIf="(MovableformSubmitted || Movableform.controls.applicantTractor.touched) && Movableform.controls.applicantTractor.errors?.required">This
+                  field is required</span>
+
+              </div>
+              <div id="no_vehicles1" class="items">
+                <div>No Vehicles</div>
+
+              </div>
+            </div>
+
+            <div class="submit-buttons">
+              <div>
+                <ul class="buttons-wrap">
+                  <li class="action-buttons"><button id="back-button" (click)="changeSection(1)">Back</button>
+                  </li>
+                  <li class="action-buttons"><button type="submit" id="continue-button"
+                      [disabled]="!form.valid" (click)="changeSection(3)">Continue</button>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </form>
+
+  <!--    madhavi code ended here -->
+

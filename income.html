@@ -68,6 +68,9 @@
     </style>
 </head>
 <body>
+    <div> 
+        <h1> Movable and Immovable</h1>
+    </div>
     <div>
     <form style = "font-size: 19px;margin:10px;">Does te applicant's family own the house they live in ?
        <input type = "radio" class = "radioButtons" name = "correct" onclick = "house(0)">Yes
@@ -153,43 +156,79 @@
             Vehicles owned?
         </label>
         <label> 
-     <input  id = "checkbox" type = "checkbox" name = "things"/>No
-     <input type = "checkbox" id = "bike" name = "things" onclick = "checkVehicle(0)"/>Bike
-     <input type = "checkbox"  id = "car" name = "things" onclick = "checkVehicle(1)"/>Car</label>
-     <input type = "checkbox" name = "things"/>Earth Mover
-     <input type ="checkbox" name = "things" />Tracktor
+     <input type = "checkbox" id = "no_vehicles"  name = "things" onclick = "checkVehicle()"/>No
+     <input type = "checkbox" id = "bike" name = "things" onclick = "checkVehicle()"/>Bike
+     <input type = "checkbox"  id = "car" name = "things" onclick = "checkVehicle()"/>Car
+     <input type = "checkbox" name = "things" id = "Earth_Mover" onclick = "checkVehicle()" />Earth Mover
+     <input type ="checkbox" name = "things" id = "Tractor" onclick = "checkVehicle()"/>Tracktor
 
      </form>
-   
-     <div id = "both">
-     <div id = "car1">
-        <label id = "data">Enter the cost of the car fuel</label>
+
+     <form id = "car1" style = "display:none">
+        <label>Enter the cost of the car fuel</label>
+
         <input type = "number" placeholder = "Enter the cost of the car fuel"/>
-     </div>
-     <div id = "bike1">
+     </form>
+     <form id = "bike1" style =  "display:none";>
         <label>Enter the cost of the Bike fuel</label>
         <input type = "number" placeholder = "Enter the cost of the Bike fuel"/>
-     </div>
-     </div>
-
+     </form>
+     <form id = "Earth_Mover_1" style =  "display:none";>
+        <label>Enter the Monthly cost for the  Earth Mover fuel</label>
+        <input type = "number" placeholder = "Enter the cost of the Earth_Mover  fuel"/>
+     </form>
+     <form id = "Tractor_1" style =  "display:none";>
+        <label>Enter the Monthly cost for the  Tracktor fuel</label>
+        <input type = "number" placeholder = "Enter the cost of the Tracktor fuel"/>
+     </form>
+<form id = "no_vehicles1" style = "display: none;">
+    <div>No Vehicles</div>
+</form>
 
 </div>
 </body>
 </html>
 <script>
-function checkVehicle(value){
-        if(value === 1){
-            if(document.getElementById("car").checked){
+function checkVehicle(){
+    var bike2 = document.getElementById("bike");
+    var car = document.getElementById("car");
+    var Earth_Mover = document.getElementById("Earth_Mover")
+    var Tracktor = document.getElementById("Tracktor")
+    var no_vehicles = document.getElementById("no_vehicles")
+        if(bike2.checked == true){
+          document.getElementById("bike1").style.display = "block";
+         }
+        else{
+         document.getElementById("bike1").style.display = "none"
+        }
+ 
+        if(car.checked === true){
+            document.getElementById("car1").style.display = "block";
+        }
+        else{
+            document.getElementById("car1").style.display = "none";
+        }
+        if(Earth_Mover.checked === true){
+            document.getElementById("Earth_Mover_1").style.display = "block";
+        }
+        else{
+            document.getElementById("Earth_Mover_1").style.display = "none";
+        }
+        if(Tractor.checked === true){
+            document.getElementById("Tractor_1").style.display = "block";
+        }
+        else{
+            document.getElementById("Tractor_1").style.display = "none";
+        }
+        
+        if(no_vehicles.checked === true){
+            document.getElementById("no_vehicles1").style.display = "block"
+        }
+        else{
+            document.getElementById("no_vehicles1").style.display = "none"
+        }
 
-        document.getElementById("data").style.display = "none";
     }
-}
-    else{
-        document.getElementById("car1").style.display = "block";
-        // document.getElementById("car1").textContent="not checked";
-
-    }
-}
 
 
 

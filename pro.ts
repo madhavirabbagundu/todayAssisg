@@ -1,0 +1,452 @@
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { textChangeRangeIsUnchanged } from 'typescript';
+import { FormGroup,AbstractControl, FormControl, FormArray, NgForm, FormBuilder, Validators } from '@angular/forms'
+// import { HomeSelectionPreview } from './preview.component';
+@Component({
+  selector: 'app-homevisits',
+  templateUrl: './homevisits.component.html',
+  styleUrls: ['./homevisits.component.css']
+})
+
+
+
+export class HomevisitsComponent implements OnInit {
+  readonly activeStepClass = "active"
+  readonly nonActiveStepClass = "disabled"
+ public form  :FormGroup;
+ public Movableform :FormGroup;
+ public Incomeform :FormGroup;
+public section5 :FormGroup;
+ public data = "empty";
+wizardStepStyle : string[]
+ wizardStepExpandState : boolean[]
+ myForm : any
+ count:number = 0;
+ interests  : string[];
+//  public section5 :FormGroup;
+ annual_income:any;
+ additional_comments:any;
+ bChecked: string; wChecked: string; oChecked: string;
+ 
+// @ViewChild(HomeSelectionPreview,{static:true})
+// previewSectin : HomeSelectionPreview
+
+ constructor(private dt:FormBuilder) {
+
+    
+    this.section5 = this.dt.group({
+      annual_income:"",
+      additional_comments:""
+    })
+
+
+    this.wizardStepStyle = [
+      this.activeStepClass,
+      this.nonActiveStepClass,
+      this.nonActiveStepClass,
+      this.nonActiveStepClass,
+      this.nonActiveStepClass,
+      this.nonActiveStepClass,
+
+    ]
+
+    this.wizardStepExpandState = [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+
+    ]
+
+    this.section5 = this.dt.group({
+     annual_income :['',Validators.required],
+     additional_comments:['', Validators.required]
+    })
+
+    this.form = this.dt.group({
+      applicantnumber: ['', Validators.required],
+      applicantname: ['', Validators.required],
+      applicanthouse: ['', Validators.required],
+      applicantstaying: ['', Validators.required],
+      applicanthouseroof: ['', Validators.required],
+      applicanthousefloor: ['', Validators.required],
+      applicanthousewall: ['', Validators.required],
+      applicanthouserooms: ['', Validators.required],
+      applicanthousemembers: ['', Validators.required]
+    })
+
+
+    this.Incomeform = this.dt.group({
+    //   applicantEarnsType: ['', Validators.required]
+      // applicantname: ['', Validators.required],
+      // applicanthouse: ['', Validators.required],
+      // applicantstaying: ['', Validators.required],
+      // applicanthouseroof: ['', Validators.required],
+      // applicanthousefloor: ['', Validators.required],
+      // applicanthousewall: ['', Validators.required],
+      // applicanthouserooms: ['', Validators.required],
+      // applicanthousemembers:['',Validators.required]
+    })
+    this.Movableform = this.dt.group({
+      applicantOwnHouse:['', Validators.required],
+      applicantRentHouse:['', Validators.required],
+      applicantOwnhouse:['', Validators.required],
+      applicantland:['', Validators.required],
+      applicantLand:['', Validators.required],
+      applicantcar:['', Validators.required],
+      applicantbike:['', Validators.required],
+      applicantTractor:['', Validators.required],
+      applicantmover:['', Validators.required],
+      applicantfield:['',Validators.required]
+
+
+    })
+
+
+  }
+
+
+  ngOnInit() {
+
+  }
+
+
+
+  //Mohammad Ali Code 
+
+  setvalue(){
+    this.annual_income = this.section5.get("annual_income").value;
+    this.additional_comments = this.section5.get("additional_comments").value
+
+  }
+
+  changeSection(index: number) {
+    //console.log(index)
+    for (let i = 0; i < this.wizardStepExpandState.length; i++) {
+      if (index - 1 === i) {
+        this.wizardStepExpandState[i] = true;
+        this.wizardStepStyle[i] = this.activeStepClass
+      } else {
+        this.wizardStepExpandState[i] = false
+        this.wizardStepStyle[i] = this.nonActiveStepClass
+
+      }
+    }
+    //console.log(this.wizardStepExpandState, this.wizardStepStyle)
+  }
+
+  // Mohammad Ali's Code ended here
+
+
+
+  onCheckboxChagen(event, value) {
+
+    console.log(value)
+    if (event.checked) {
+
+      this.interests.push(value);
+
+    }
+
+    if (!event.checked) {
+
+      let index = this.interests.indexOf(value);
+      if (index > -1) {
+        this.interests.splice(index, 1);
+      }
+    }
+
+
+    console.log("Interests array => " + JSON.stringify(this.interests, null, 2));
+  }
+  // Chinni code start from here
+  
+
+
+  livingOrNot(e) {
+    let showDetails = document.getElementById("showing_details") as HTMLInputElement;
+
+
+    if (e.target.value == 'Yes') {
+      showDetails.style.display = "none";
+    } else if (e.target.value == 'No') {
+      showDetails.style.display = "block"
+    }
+
+  }
+
+  // Chinni code end here
+  
+
+
+  // madhavi code starts here
+
+  House(num: number) {
+    var item = document.getElementById("items1") as HTMLInputElement;
+    var rent = document.getElementById("rent") as HTMLInputElement;
+    if (num === 0) {
+      item.style.display = "grid"
+    }
+    else {
+      item.style.display = "none"
+    }
+    if (num === 1) {
+      rent.style.display = "grid"
+    }
+    else {
+      rent.style.display = "none"
+    }
+  }
+
+  land(num: number) {
+    var land = document.getElementById("dimension") as HTMLInputElement;
+    if (num === 0) {
+      land.style.display = "grid"
+    }
+    else {
+      land.style.display = "none"
+    }
+  }
+
+  field(num: number) {
+    var field = document.getElementById("field1") as HTMLInputElement;
+    if (num === 0) {
+      field.style.display = "block"
+    }
+    else {
+      field.style.display = "none"
+    }
+  }
+  checkVehicle() {
+    var no_vehicles = document.getElementById("no_vehicles") as HTMLInputElement;
+    var no_vehicles1 = document.getElementById("no_vehicles1") as HTMLInputElement;
+    var bike = document.getElementById("bike") as HTMLInputElement
+    var bike1 = document.getElementById("bike1") as HTMLInputElement
+    var car = document.getElementById("car") as HTMLInputElement
+    var car1 = document.getElementById("car1") as HTMLInputElement
+    var Earth_Mover = document.getElementById("Earth_Mover") as HTMLInputElement
+    var Earth_Mover1 = document.getElementById("Earth_Mover_1") as HTMLInputElement
+    var tractor = document.getElementById("Tractor") as HTMLInputElement
+    var tractor1 = document.getElementById("Tractor_1") as HTMLInputElement
+
+
+    if (no_vehicles.checked === true) {
+      no_vehicles1.style.display = "grid";
+    }
+    else {
+      no_vehicles1.style.display = "none"
+    }
+    if (bike.checked === true) {
+      bike1.style.display = "grid"
+    }
+    else {
+      bike1.style.display = "none"
+    }
+
+    if (car.checked === true) {
+      car1.style.display = "grid"
+    }
+    else {
+      car1.style.display = "none"
+    }
+
+    if (Earth_Mover.checked === true) {
+      Earth_Mover1.style.display = "grid"
+    }
+    else {
+      Earth_Mover1.style.display = "none"
+    }
+
+    if (tractor.checked === true) {
+      tractor1.style.display = "grid"
+    }
+    else {
+      tractor1.style.display = "none"
+    }
+  }
+
+  // madhavi code ended here
+
+
+
+  submit1() {
+    console.log(this.form.value);
+    this.changeSection(2);
+  }
+  submit4() {
+    console.log(this.Incomeform.value);
+    this.changeSection(4);
+  }
+
+  myFunction() {
+
+
+    let checkBox = document.getElementById("value1") as HTMLInputElement;
+    // Get the output text
+    let text = document.getElementById("informal") as HTMLInputElement;
+
+    if (checkBox.checked == true) {
+      text.style.display = "flex";
+    } else {
+      text.style.display = "none";
+    }
+  }
+  handleformal() {
+    // Get the checkbox
+    //console.log("VENKY");
+    var checkBox = document.getElementById("value2") as HTMLInputElement;
+    // Get the output text
+    var text = document.getElementById("formal") as HTMLInputElement;
+
+    if (checkBox.checked == true) {
+      text.style.display = "flex";
+    } else {
+      text.style.display = "none";
+    }
+  }
+  handlelivestock() {
+    // Get the checkbox
+    //console.log("VENKY");
+    var checkBox = document.getElementById("value4") as HTMLInputElement;
+    // Get the output text
+    var text = document.getElementById("livestock") as HTMLInputElement;
+
+    if (checkBox.checked == true) {
+      text.style.display = "flex";
+      text.style.flexDirection = "column"
+    } else {
+      text.style.display = "none";
+    }
+  }
+  handlefarm() {
+    // Get the checkbox
+    //console.log("VENKY");
+    var checkBox = document.getElementById("value3") as HTMLInputElement;
+    // Get the output text
+    var text = document.getElementById("farmer") as HTMLInputElement;
+
+    if (checkBox.checked == true) {
+      text.style.display = "flex";
+      text.style.flexDirection = "column"
+    } else {
+      text.style.display = "none";
+    }
+  }
+
+  handlevechiclerent() {
+    var checkBox = document.getElementById("value5") as HTMLInputElement;
+    // Get the output text
+    var text = document.getElementById("vechicle-rent") as HTMLInputElement;
+
+    if (checkBox.checked == true) {
+      text.style.display = "flex";
+      // text.style.flexDirection = "column"
+    } else {
+      text.style.display = "none";
+    }
+  }
+  // handleautofill(event) {
+  //       let id = event.target.getAttribute('id');
+
+  //       var checkBox = document.getElementById(id);
+  //       // Get the output text
+  //       var text = document.getElementById("auto-fill-value");
+
+  //       if (checkBox.checked == true) {
+
+  //           // console.log(text.innerText);
+  //           count = count + 1;
+  //           text.value = count;
+  //       } else {
+
+  //           count = count - 1;
+  //           text.value = count
+  //       }
+
+  //   }
+
+  handlecow() {
+    // Get the checkbox
+    //console.log("VENKY");
+    var checkBox = document.getElementById("cow") as HTMLInputElement;
+    // Get the output text
+    var text = document.getElementById("livestock-cow-form3");
+
+    if (checkBox.checked == true) {
+      text.style.display = "block";
+    } else {
+      text.style.display = "none";
+    }
+  }
+  TVvalue: string = "";
+
+
+  handleTvInput(value: string) {
+    var checkBox = document.getElementById("is-Tv-has") as HTMLInputElement;
+
+    //console.log(text);
+    if (value == 'TV') {
+      checkBox.style.display = "block";
+    } else {
+      checkBox.style.display = "none";
+    }
+
+  }
+
+  handleHostalInput() {
+    var checkBox = document.getElementById("Hostal") as HTMLInputElement;
+
+    var text = document.getElementById("is-Tv-has") as HTMLInputElement;
+    console.log(text);
+    if (text.checked == true) {
+      checkBox.style.display = "block";
+    } else {
+      text.style.display = "none";
+    }
+
+  }
+
+  loanOutStanding(num: number) {
+    let showDetails = document.getElementById("loan-input-field") as HTMLInputElement;
+
+    //console.log(num);
+    if (num == 1) {
+      showDetails.style.display = "flex";
+      showDetails.style.columnGap = "20px";
+
+    } else if (num == 0) {
+      showDetails.style.display = "none"
+    }
+
+  }
+
+  assistence(num: number) {
+    let showDetails = document.getElementById("assistence-form-yes") as HTMLInputElement;
+
+    //console.log(num);
+    if (num == 1) {
+      showDetails.style.display = "flex";
+      showDetails.style.columnGap = "20px";
+
+    } else if (num == 0) {
+      showDetails.style.display = "none"
+    }
+
+  }
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
